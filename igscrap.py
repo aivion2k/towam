@@ -1,12 +1,21 @@
-from bs4 import BeautifulSoup as soup  # HTML data structure
-import requests
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+PATH = "C:/Program Files (x86)/chromedriver_win32/chromedriver.exe"
+driver = webdriver.Chrome(PATH)
+
+driver.get("https://www.youtube.com/feed/trending?bp=6gQJRkVleHBsb3Jl")
+accept = driver.find_element_by_xpath("/html/body/c-wiz/div/div/div/div[2]/div[1]/div[4]/form/div[1]/div/button/span")
+accept.click()
 
 
-page_url = 'https://www.instagram.com/kimkardashian/?hl=en'
-source = requests.get(page_url).text
+watchers = driver.find_elements(By.ID,"video-title")
+wyswietlenia = driver.find_elements(By.CLASS_NAME,"style-scope ytd-video-meta-block")
+for i in range(len(watchers)):
+    
+    print(watchers[i].text)
+    print(wyswietlenia[i].text)
 
-soup_html = soup(source,'html.parser')
 
-print(soup_html.prettify())
-
-#lkwanldknawlkdnwalkdnawd adlwakmdlkamdnlkanw
+#search = driver.find_element_by_id()

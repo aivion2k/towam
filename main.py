@@ -1,6 +1,5 @@
 from tkinter import *
 from tkinter import ttk
-import igscrap
 from PIL import Image, ImageTk
 from threading import Thread
 from tkinter import DoubleVar

@@ -16,7 +16,7 @@ class DriverEngine(Thread):
     def __init__(self):
         super().__init__()
 
-    def run(string_path):
+    def run(self):
         PATH = "C:/Program Files (x86)/chromedriver_win32/chromedriver.exe"
         driver = webdriver.Chrome(PATH)
 
@@ -136,8 +136,9 @@ class MyApp():
     def openNewWindow(self):
         self.pgb.grid(row=5,pady=10)
         self.pgb.start()
-        scrap_thread = igscrap.DriverEngine()
+        scrap_thread = DriverEngine()
         scrap_thread.setDaemon(True)
+        scrap_thread.start()
        
         
 
@@ -147,3 +148,4 @@ class MyApp():
 root = Tk()
 MyApp(root)
 root.mainloop()
+

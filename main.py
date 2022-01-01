@@ -208,19 +208,43 @@ class ChannelGui():
         style = ttk.Style(root1)
         style.theme_use('clam')
 
-        data = data
+        self.data = data
         self.author = autor
-        self.wys = float_wys[0]
+        self.wys = float_wys
+        self.temp = StringVar()
         root1.title('Channel info')
         root1.configure(background='#4d0026')
-        root1.geometry("500x500")
-
+        root.resizable(False,False)
         
+        self.listbox1 = ttk.Combobox(root1)
+        self.listbox1['values'] = self.data
+        self.listbox1.current(0)
+        self.listbox1['state']='readonly'
+        self.listbox1.grid(row=1,column=1,padx=10,pady=5)
+        
+        
+        lbl_channel_name = ttk.Label(root1,text='Channel name: ',background='#4d0026',foreground='white').grid(row=0,column=0,padx=10,pady=5)
+        lbl_author = ttk.Label(root1,text=self.author)
+        lbl_author.grid(row=0,column=1,padx=10,pady=5)
+        lbl_data = ttk.Label(root1,text='Choose the date: ',background='#4d0026',foreground='white').grid(row=1,column=0,padx=10,pady=5)
+        btn_date = ttk.Button(root1,text='Show statistics',command=lambda: self.countViews()).grid(row=2,columnspan=2,column=0,padx=10,pady=5)
 
-        lbl1 = ttk.Label(root1,text=self.author)
-        lbl2 = ttk.Label(root1,text=self.wys)
-        lbl1.grid(row=0)
-        lbl2.grid(row=1)
+        lbl_views = ttk.Label(root1,text='Views from to selected date: ',background='#4d0026',foreground='white').grid(row=3,column=0,padx=10,pady=5)
+        self.lbl_count = ttk.Label(root1)
+        
+    def countViews(self):
+        print(self.temp.get())
+        temp_count = 0
+        for i in range(len(self.data)):
+            temp_count += self.wys[i]
+            if self.data[self.listbox1.current()] == self.data[i]:
+                break
+        
+        self.lbl_count.configure(text=str(temp_count)+' views')
+        self.lbl_count.grid(row=3,column=1,padx=10,pady=5)
+
+
+
 
 class FigureGui():
     def __init__(self,rt,autorzy,wyswietlenia):

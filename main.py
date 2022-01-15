@@ -1,4 +1,4 @@
-from math import exp
+
 from tkinter import *
 import tkinter as tk
 from tkinter import ttk
@@ -21,7 +21,7 @@ from matplotlib import colorbar
 from matplotlib.figure import Figure
 import matplotlib.pyplot as plt
 import numpy as np
-from pylab import MaxNLocator
+
 
 
 class DriverEngine(Thread):
@@ -31,7 +31,6 @@ class DriverEngine(Thread):
     
     def run(self):
         path = self.getName()
-        print(path)
         s=Service("C:/Program Files (x86)/chromedriver_win32/chromedriver.exe")
         driver = webdriver.Chrome(service=s)
         dane = []
@@ -68,7 +67,7 @@ class DriverEngine(Thread):
                         int1 = float(temps[0])                   
                         
                     int1 *= 1000000
-                    
+                
                 
                 if temps[1] == 'tys.':
                     try:
@@ -82,11 +81,11 @@ class DriverEngine(Thread):
                 wyswietlenia.append(int1)
                 try:
                     temp1 = temps[3] +' '+ temps[4] +' '+ temps[5]
-                    print(temp1)
+                    
                     data.append(temp1)
                 except:
-                    print('DUPA')
-                    print(temp1)
+                    
+                    pass
            
             autorzy = autorzy[:48] 
             wyswietlenia = wyswietlenia[:48] 
@@ -229,11 +228,11 @@ class ChannelGui():
         lbl_data = ttk.Label(root1,text='Choose the date: ',background='#4d0026',foreground='white').grid(row=1,column=0,padx=10,pady=5)
         btn_date = ttk.Button(root1,text='Show statistics',command=lambda: self.countViews()).grid(row=2,columnspan=2,column=0,padx=10,pady=5)
 
-        lbl_views = ttk.Label(root1,text='Views from to selected date: ',background='#4d0026',foreground='white').grid(row=3,column=0,padx=10,pady=5)
+        lbl_views = ttk.Label(root1,text='Views to selected date: ',background='#4d0026',foreground='white').grid(row=3,column=0,padx=10,pady=5)
         self.lbl_count = ttk.Label(root1)
         
     def countViews(self):
-        print(self.temp.get())
+        
         temp_count = 0
         for i in range(len(self.data)):
             temp_count += self.wys[i]
